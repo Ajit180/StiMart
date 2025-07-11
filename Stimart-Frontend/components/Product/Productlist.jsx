@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import Image from "next/image";
 import useProductFetch from "@/hooks/api/product/useProductFetch";
 import Link from "next/link";

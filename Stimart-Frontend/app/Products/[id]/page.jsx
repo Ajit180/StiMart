@@ -1,5 +1,5 @@
 import { getProductById } from "@/apis/product";
-import ProductClient from "@/components/Product";
+import ProductClient from "@/components/Product/Product";
 
 
 const SingleProductPage = async ({ params }) => {

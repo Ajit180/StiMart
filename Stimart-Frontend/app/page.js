@@ -1,5 +1,5 @@
 import HeaderSlider from "@/components/HeaderSlider";
-import ProductList from "@/components/Productlist";
+import ProductList from "@/components/Product/Productlist";
 
 
 export default function Home() {
