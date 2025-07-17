@@ -2,9 +2,11 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { GetCategoryAllRequest } from "@/api/category";
+import useAuthStore from "@/hooks/Store/useAuth";
 
-export const useGetAllCategory = (token) => {
 
+export const useGetAllCategory = () => {
+ const { token } = useAuthStore();
   const {
     data,
     isLoading,

@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import useAuthStore from "@/hooks/Store/useAuth";
+import { useGetAllCategory } from "@/hooks/api/Category/useGetAllCategory";
 
 const CreateProduct = () => {
   const [productForm, setProductForm] = useState({
@@ -22,10 +23,10 @@ const CreateProduct = () => {
     description: "",
     price: "",
     images: [], // array of uploaded image URLs
-    categoryId: "",
     stock: "",
     brand: "",
     rating: "",
+    categoryId: "",
   });
 
   const { token } = useAuthStore();
@@ -34,7 +35,6 @@ const CreateProduct = () => {
   const [uploading, setUploading] = useState(false);
   const [open, setOpen] = useState(false);
 
-
   const {
     data: createdata,
     isPending,
@@ -42,6 +42,8 @@ const CreateProduct = () => {
     error,
     createProductmutation,
   } = useCreateProduct();
+
+  const { data: categories = []} = useGetAllCategory();
 
   console.log("createdata", createdata);
   // 🟡 Upload multiple images
@@ -110,8 +112,9 @@ const CreateProduct = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-blue-600 hover:bg-blue-700 text-white"
-        onClick={()=>setOpen(true)}
+        <Button
+          className="bg-blue-600 hover:bg-blue-700 text-white"
+          onClick={() => setOpen(true)}
         >
           + Add Product
         </Button>
@@ -123,28 +126,119 @@ const CreateProduct = () => {
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {[
-            { label: "Name", name: "name", type: "text" },
-            { label: "Description", name: "description", type: "text" },
-            { label: "Price", name: "price", type: "number" },
-            { label: "Category ID", name: "categoryId", type: "text" },
-            { label: "Stock", name: "stock", type: "number" },
-            { label: "Brand", name: "brand", type: "text" },
-            { label: "Rating", name: "rating", type: "number" },
-          ].map(({ label, name, type }) => (
-            <div key={name}>
-              <Label htmlFor={name}>{label}</Label>
-              <Input
-                id={name}
-                type={type}
-                value={productForm[name]}
-                onChange={(e) =>
-                  setProductForm({ ...productForm, [name]: e.target.value })
-                }
-                required
-              />
-            </div>
-          ))}
+          <div>
+            <Label htmlFor="name">Name</Label>
+            <Input
+              id="name"
+              type="text"
+              value={productForm.name}
+              onChange={(e) =>
+                setProductForm({ ...productForm, name: e.target.value })
+              }
+              required
+            />
+          </div>
+
+          <div>
+            <Label htmlFor="description">Description</Label>
+            <Input
+              id="description"
+              type="text"
+              value={productForm.description}
+              onChange={(e) =>
+                setProductForm({ ...productForm, description: e.target.value })
+              }
+              required
+            />
+          </div>
+
+          <div>
+            <Label htmlFor="price">Price</Label>
+            <Input
+              id="price"
+              type="number"
+              value={productForm.price}
+              onChange={(e) =>
+                setProductForm({ ...productForm, price: e.target.value })
+              }
+              required
+            />
+          </div>
+
+          <div>
+            <Label htmlFor="stock">Stock</Label>
+            <Input
+              id="stock"
+              type="number"
+              value={productForm.stock}
+              onChange={(e) =>
+                setProductForm({ ...productForm, stock: e.target.value })
+              }
+              required
+            />
+          </div>
+
+          <div>
+            <Label htmlFor="brand">Brand</Label>
+            <Input
+              id="brand"
+              type="text"
+              value={productForm.brand}
+              onChange={(e) =>
+                setProductForm({ ...productForm, brand: e.target.value })
+              }
+              required
+            />
+          </div>
+
+          <div>
+            <Label htmlFor="rating">Rating</Label>
+            <Input
+              id="rating"
+              type="number"
+              value={productForm.rating}
+              onChange={(e) =>
+                setProductForm({ ...productForm, rating: e.target.value })
+              }
+              required
+            />
+          </div>
+
+          <div>
+            <Label htmlFor="categoryId">Category ID</Label>
+            <Input
+              id="categoryId"
+              type="text"
+              value={productForm.categoryId}
+              onChange={(e) =>
+                setProductForm({ ...productForm, categoryId: e.target.value })
+              }
+              required
+            />
+          </div>
+
+          {/* dropdown for select category */}
+          <div>
+            <Label htmlFor="categoryId">Category</Label>
+            <select
+              id="categoryId"
+              value={productForm.categoryId}
+              onChange={(e) =>
+                setProductForm({ ...productForm, categoryId: e.target.value })
+              }
+              required
+              className="w-full border rounded px-2 py-1"
+            >
+              <option value="">Select Category</option>
+              {(categories?.category || []).map((cat) => (
+                <option key={cat.id} value={cat._id}>
+                  {" "}
+                  {/* here i set id as value and selecting name of category */}
+                  {cat.name}
+                </option>
+              ))}
+            </select>
+          </div>
 
           {/* 🟦 File Upload */}
           <div>
@@ -174,17 +268,17 @@ const CreateProduct = () => {
             </Button>
             {isImageUploaded && (
               <div className="flex gap-2 mt-2">
-                {/* {productForm.images.map((url, index) => (
+                {productForm.images.map((url, index) => (
                   <img
                     key={index}
                     src={url}
                     alt={`Uploaded ${index}`}
                     className="w-20 h-20 object-cover rounded px-1"
                   />
-                ))} */}
+                ))}
                 <p className="text-green-600 text-sm mt-2">
-                ✅ All images uploaded
-              </p>
+                  ✅ All images uploaded
+                </p>
               </div>
             )}
 

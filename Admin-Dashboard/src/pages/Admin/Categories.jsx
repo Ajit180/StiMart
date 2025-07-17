@@ -13,7 +13,7 @@ const Categories = () => {
   const {token}=useAuthStore();
   const queryClient = useQueryClient();
 
-  const { data: categories = [], isLoading: isFetching } = useGetAllCategory(token);
+  const { data: categories = [], isLoading: isFetching } = useGetAllCategory();
   const { CreateCategorymutation, isSuccess: isCreated } = useCreateCategory();
   const { DeleteCategoryMutation, isSuccess: isDeleted } = useDeleteCategory();
   const { UpdateCategoryMutation, isSuccess: isUpdated } = useUpdateCategory();
