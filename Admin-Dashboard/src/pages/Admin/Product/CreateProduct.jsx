@@ -126,7 +126,7 @@ const CreateProduct = () => {
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
+          <div className="flex flex-col gap-y-2">
             <Label htmlFor="name">Name</Label>
             <Input
               id="name"
@@ -139,7 +139,7 @@ const CreateProduct = () => {
             />
           </div>
 
-          <div>
+          <div className="flex flex-col gap-y-2">
             <Label htmlFor="description">Description</Label>
             <Input
               id="description"
@@ -152,7 +152,7 @@ const CreateProduct = () => {
             />
           </div>
 
-          <div>
+          <div className="flex flex-col gap-y-2">
             <Label htmlFor="price">Price</Label>
             <Input
               id="price"
@@ -165,7 +165,7 @@ const CreateProduct = () => {
             />
           </div>
 
-          <div>
+          <div className="flex flex-col gap-y-2">
             <Label htmlFor="stock">Stock</Label>
             <Input
               id="stock"
@@ -178,7 +178,7 @@ const CreateProduct = () => {
             />
           </div>
 
-          <div>
+          <div className="flex flex-col gap-y-2">
             <Label htmlFor="brand">Brand</Label>
             <Input
               id="brand"
@@ -191,8 +191,10 @@ const CreateProduct = () => {
             />
           </div>
 
-          <div>
-            <Label htmlFor="rating">Rating</Label>
+          <div className="flex flex-col gap-y-2">
+            <Label htmlFor="rating" 
+            className="text-sm font-medium"
+            >Rating</Label>
             <Input
               id="rating"
               type="number"
@@ -201,10 +203,11 @@ const CreateProduct = () => {
                 setProductForm({ ...productForm, rating: e.target.value })
               }
               required
+               placeholder="Enter your Rating 1 to 5 only"
             />
           </div>
 
-          <div>
+          <div className="hidden">
             <Label htmlFor="categoryId">Category ID</Label>
             <Input
               id="categoryId"
@@ -218,7 +221,7 @@ const CreateProduct = () => {
           </div>
 
           {/* dropdown for select category */}
-          <div>
+          <div className="flex flex-col gap-y-2">
             <Label htmlFor="categoryId">Category</Label>
             <select
               id="categoryId"
@@ -241,8 +244,8 @@ const CreateProduct = () => {
           </div>
 
           {/* 🟦 File Upload */}
-          <div>
-            <Label htmlFor="image">Upload up to 4 images</Label>
+          <div className="gap-y-2">
+            <Label htmlFor="image" className={"py-2"}>Upload up to 4 images</Label>
             <Input
               id="image"
               type="file"
@@ -257,11 +260,12 @@ const CreateProduct = () => {
                 setFiles(selected);
                 setIsImageUploaded(false);
               }}
+              className="py-2"
             />
             <Button
               type="button"
               onClick={handleUploadImages}
-              className="mt-2"
+              className="mt-4"
               disabled={!files.length || uploading}
             >
               {uploading ? "Uploading..." : "Upload Images"}

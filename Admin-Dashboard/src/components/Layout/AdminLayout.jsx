@@ -8,7 +8,7 @@ const AdminLayout = () => {
       : "block px-4 py-2 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-all";
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex scroll-auto md:min-h-screen">
       {/* Sidebar */}
       <aside className="w-64 bg-gray-900 text-white p-6 shadow-lg">
         <h2 className="text-2xl font-bold mb-6 tracking-wide">Admin Panel</h2>
