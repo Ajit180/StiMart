@@ -1,4 +1,5 @@
 import { ProductRepository } from "../repository/productRepository.js";
+import Product from "../schema/products.js";
 
 
 export const createproduct = async(data)=>{
@@ -12,11 +13,17 @@ export const createproduct = async(data)=>{
 }
 
 //here i am getting the product from the db
-export const getallProduct = async()=>{
+export const getallProduct = async(page =1,limit =10)=>{
    try {
 
-    const product = await ProductRepository.getall();
-    return product;
+    const skip = (page-1)*limit;
+    const products = await Product.find().skip(skip).limit(limit);
+    const total = await Product.countDocuments();
+    const totalpages = Math.ceil(total/limit);
+
+    // const product = await ProductRepository.getall();
+    // return product;
+    return {products,page,total,totalpages};
     
    } catch (error) {
      console.log('Error in getting the product',error.message);

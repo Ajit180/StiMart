@@ -65,14 +65,9 @@ export const DeleteProductRequest = async ({ id, token }) => {
 };
 
 
-export const GetAllProductsRequest = async (token) => {
+export const GetAllProductsRequest = async (page) => {
   try {
-    const response = await axios.get("/product/getall", {
-      headers: {
-        "x-access-token": token,
-      },
-    });
-
+    const response = await axios.get(`/product/getall?page=${page}&limit=${2}`);
     console.log("📦 All products fetched:", response.data);
     return response.data;
   } catch (error) {

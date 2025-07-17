@@ -3,28 +3,25 @@
 import { useQuery } from "@tanstack/react-query";
 import { GetAllProductsRequest } from "@/api/orders";
 
-export const useGetAllProduct = (token) => {
-
+export const useGetAllProduct = (page) => {
   const {
     data,
     isLoading,
     isError,
     error,
-    refetch: fetchProduct,
+    // refetch: fetchProduct,
   } = useQuery({
-    queryKey: ["getAllProduct"],
-    queryFn: () => GetAllProductsRequest(token),
+    queryKey: ["getAllProduct",page],
+    queryFn: () => GetAllProductsRequest(page),
     onError: (err) => {
       console.error("GetAllProduct error:", err);
     },
-    enabled: !!token,
   });
 
   return {
     data,
     isLoading,
     isError,
-    error,
-    fetchProduct,
+    error
   };
 };

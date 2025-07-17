@@ -2,7 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getAllProducts } from "@/apis/product";
 
-const useProductFetch = () => {
+const useProductFetch = (page) => {
     const {
       data,
       isLoading,
@@ -11,8 +11,9 @@ const useProductFetch = () => {
       error,
       refetch,
     } = useQuery({
-      queryKey: ["products"],
-      queryFn: getAllProducts,
+      queryKey: ["products",page],
+      queryFn:()=> getAllProducts(page),
+      keepPreviousData: true,
     });
   
     return { data, isLoading, isError, isSuccess, error, refetch };

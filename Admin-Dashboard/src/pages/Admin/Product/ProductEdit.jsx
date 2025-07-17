@@ -19,16 +19,16 @@ const ProductEdit = () => {
 
   const [isEditMode, setIsEditMode] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
+  const [page,setpage] = useState(1);
   const { token } = useAuthStore();
   const queryClient = useQueryClient();
 
-  const { data: products = [], isLoading: isFetching } = useGetAllProduct(token);
+  const { data:productdata, isLoading: isFetching } = useGetAllProduct(page);
   const { data:updateddata,UpdateProductMutation, isSuccess: isUpdated } = useUpdateProduct();
   const { data:deletedata,DeleteProductMutation, isSuccess: isDeleted } = useDeleteProduct();
 
-  console.log('Products in the ProductEdit after updated',updateddata);
-  console.log('Products in the ProductEdit after deleted',deletedata);
-
+  console.log("Get ProductData in Product component",productdata?.data?.products|| []);
+  const products = productdata?.data?.products;
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -149,8 +149,8 @@ const ProductEdit = () => {
         {isFetching ? (
           <p>Loading products...</p>
         ) : (
-          <ul className="divide-y divide-gray-200">
-            {(products?.data || []).map((prod) => (
+          <ul className="divide-y divide-gray-200"> 
+            {(products || []).map((prod) => (
               <li key={prod._id} className="flex justify-between items-center py-2">
                 <div>
                   <p className="font-medium">{prod.name}</p>
@@ -174,7 +174,21 @@ const ProductEdit = () => {
             ))}
           </ul>
         )}
+        
       </div>
+      <div className="flex flex-col sm:flex-row items-center justify-between mt-3">
+        <button
+          className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-900"
+         onClick={()=>setpage((prev)=>Math.max(prev-1,1))}
+        >Prev</button>
+          <p className="text-xl">{page}</p>
+          <button
+          className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-900"
+            onClick={()=>setpage((prev)=>Math.max(prev+1,1))} 
+          >Next</button>
+        
+        
+        </div>
     </div>
   );
 };

@@ -78,7 +78,11 @@ export const deleteProductController = async (req, res) => {
 export const getPoductAllContoller = async(req,res)=>{
 
   try {
-     const product = await getallProduct();
+    const page = parseInt(req.query.page)||1;
+    const limit = parseInt(req.query.limit)||10;
+
+     const product = await getallProduct(page,limit);
+     console.log(product);
      if (!product) {
         return res.status(404).json({ success: false, message: "Product not found" });
       }
