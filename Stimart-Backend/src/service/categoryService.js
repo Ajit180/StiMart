@@ -1,55 +1,51 @@
-import { CategoryRepository } from "../repository/categoryRepository.js";
+import Category from "../schema/category.js";
 
-export const createCategory = async(data)=>{
-
-    try {
-        const category = await CategoryRepository.create(data);
-        return category;
-        
-    } catch (error) {
-        console.log('Error in Creating Category');
-    }
-}
-
-//here i am getting the product from the db
-export const getallCategory = async()=>{
-   try {
-
-    const category = await CategoryRepository.getAll();
+// CREATE
+export const createCategory = async (data) => {
+  try {
+    const category = await Category.create(data);
     return category;
-    
-   } catch (error) {
-     console.log('Error in getting category',error.message);
-   }
-}
-
-export const getCategorybyId = async(id)=>{
-
-    try {
-        const category = await CategoryRepository.getById(id);
-        return category;
-        
-    } catch (error) {
-        console.log('Error in getting Category by Id',error.message);
-    }
-}
-
-export const updatecategory = async(id,data)=>{
-    try {
-        const category = await CategoryRepository.update(id,data);
-        return category;
-        
-    } catch (error) {
-        console.log('Error in updating the Category',error,message);
-    }
+  } catch (error) {
+    console.log("Error in Creating Category:", error.message);
+  }
 };
 
-export const deletecategory = async(id)=>{
-    try {
-        const category = await CategoryRepository.delete(id);
-        return category;
-        
-    } catch (error) {
-       console.log('Error in deleting the Category',error.message);
-    }
-}
+// READ ALL
+export const getallCategory = async () => {
+  try {
+    const categories = await Category.find();
+    return categories;
+  } catch (error) {
+    console.log("Error in getting category:", error.message);
+  }
+};
+
+// READ BY ID
+export const getCategorybyId = async (id) => {
+  try {
+    const category = await Category.findById(id);
+    return category;
+  } catch (error) {
+    console.log("Error in getting Category by Id:", error.message);
+  }
+};
+
+// UPDATE
+export const updatecategory = async (id, data) => {
+  try {
+    const category = await Category.findByIdAndUpdate(id, data, { new: true });
+    return category;
+  } catch (error) {
+    console.log("Error in updating the Category:", error.message);
+  }
+};
+
+// DELETE
+export const deletecategory = async (id) => {
+  try {
+    const category = await Category.findByIdAndDelete(id);
+    return category;
+  } catch (error) {
+    console.log("Error in deleting the Category:", error.message);
+  }
+};

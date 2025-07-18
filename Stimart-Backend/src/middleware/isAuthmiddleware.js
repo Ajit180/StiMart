@@ -1,8 +1,8 @@
 import { StatusCodes } from 'http-status-codes';
 import jwt from 'jsonwebtoken';
 import {customErrorResponse,internalErrorResponse} from '../utils/Common/CommonResponse.js'
-import userRepository from '../repository/userRepository.js';
 import { JWT_SECRET } from '../config/serverconfigfile.js';
+import { getUserById } from '../service/userService.js';
 
 export const isAuthenticated = async (req, res, next) => {
   try {
@@ -27,7 +27,7 @@ export const isAuthenticated = async (req, res, next) => {
       );
     }
 
-    const user = await userRepository.getById(response.id);
+    const user = await getUserById(response.id);
     // console.log("Authenticated user:", user);
     req.user = user; // here i did not passed the _ so facing an error 
     next();

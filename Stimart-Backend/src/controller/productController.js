@@ -1,17 +1,18 @@
 import { StatusCodes } from "http-status-codes";
-import { createproduct, deleteproduct, getallProduct, getproductbyId, updateproduct } from "../service/productRepository.js";
+
 import { internalErrorResponse, successResponse } from "../utils/Common/CommonResponse.js";
 import { PutObjectCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { s3Client } from "../config/awsconfig.js";
 import { AWS_BUCKET_NAME } from "../config/serverconfigfile.js";
+import { createProduct, deleteProduct, getAllProducts, getProductById, updateProduct } from "../service/productService.js";
 
 export const createproductcontroller = async(req,res)=>{
    try {
     
     const categoryId = req.params.categoryId;
     const productdata={...req.body,categoryId:categoryId}
-    const product = await createproduct(productdata);
+    const product = await createProduct(productdata);
     return res.status(StatusCodes.CREATED).json(successResponse(product));
     
    } catch (error) {
@@ -25,7 +26,7 @@ export const getPoductByIdContoller = async(req,res)=>{
    try {
 
       const productId = req.params.productId;
-      const product = await getproductbyId(productId);
+      const product = await getProductById(productId);
       if (!product) {
          return res.status(404).json({ success: false, message: "Product not found" });
        }
@@ -44,7 +45,7 @@ export const updateProductController = async (req, res) => {
   try {
     const { id } = req.params; // get id from URL params
     console.log(id);
-    const updatedProduct = await updateproduct(id, req.body); // pass body data to service
+    const updatedProduct = await updateProduct(id, req.body); // pass body data to service
 
     if (!updatedProduct) {
       return res.status(404).json({ success: false, message: "Product not found" });
@@ -61,7 +62,7 @@ export const updateProductController = async (req, res) => {
 export const deleteProductController = async (req, res) => {
   try {
     const { id } = req.params; // get id from URL params
-    const deletedProduct = await deleteproduct(id);
+    const deletedProduct = await deleteProduct(id);
 
     if (!deletedProduct) {
       return res.status(404).json({ success: false, message: "Product not found" });
@@ -81,7 +82,7 @@ export const getPoductAllContoller = async(req,res)=>{
     const page = parseInt(req.query.page)||1;
     const limit = parseInt(req.query.limit)||10;
 
-     const product = await getallProduct(page,limit);
+     const product = await getAllProducts(page,limit);
      console.log(product);
      if (!product) {
         return res.status(404).json({ success: false, message: "Product not found" });

@@ -1,50 +1,50 @@
-import { OrderRepository } from "../repository/orderRepository.js";
 import Order from "../schema/orders.js";
 
-export const createOrderService = async (data,id) => {
+// Create a new order
+export const createOrderService = async (data, userId) => {
   try {
-
-  const newOrder = await OrderRepository.create(data,id);
-  return newOrder;
-  
+    const newOrder = await Order.create({ ...data, user: userId });
+    return newOrder;
   } catch (error) {
     console.log("Error in creating Order", error.message);
   }
 };
 
-// here i am getting the order from the db
-export const getAllOrders = async (OrderId) => {
+// Get a specific order by its ID
+export const getAllOrders = async (orderId) => {
   try {
-    const order = await Order.findById(OrderId)
-    
+    const order = await Order.findById(orderId);
     return order;
   } catch (error) {
-    console.log("Error in getting the orders", error.message);
+    console.log("Error in getting the order", error.message);
   }
 };
 
+// Get order by ID (duplicate of above — we can merge or rename this)
 export const getOrderById = async (id) => {
   try {
-    const order = await OrderRepository.getById(id);
+    const order = await Order.findById(id);
     return order;
   } catch (error) {
     console.log("Error in getting Order by Id", error.message);
   }
 };
 
+// Update an order by ID
 export const updateOrder = async (id, data) => {
   try {
-    const order = await OrderRepository.update(id, data);
-    return order;
+    const updatedOrder = await Order.findByIdAndUpdate(id, data, { new: true });
+    return updatedOrder;
   } catch (error) {
     console.log("Error in updating the order", error.message);
   }
 };
 
+// Delete an order by ID
 export const deleteOrder = async (id) => {
   try {
-    const order = await OrderRepository.delete(id);
-    return order;
+    const deletedOrder = await Order.findByIdAndDelete(id);
+    return deletedOrder;
   } catch (error) {
     console.log("Error in deleting the order", error.message);
   }

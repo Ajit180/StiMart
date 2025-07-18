@@ -4,7 +4,7 @@ import {
   internalErrorResponse,
   successResponse,
 } from "../utils/Common/CommonResponse.js";
-import { getproductbyId } from "../service/productRepository.js";
+import { getProductById } from "../service/productService.js";
 
 // Create Order
 export const createOrderController = async (req, res) => {
@@ -23,7 +23,7 @@ export const createOrderController = async (req, res) => {
     const orderProducts = [];
 
     for (let item of products) {
-      const productData = await getproductbyId(item.product); // Fetch from service
+      const productData = await getProductById(item.product); // Fetch from service
 
       if (!productData) {
         return res.status(404).json({ message: `Product not found: ${item.product}` });
