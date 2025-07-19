@@ -11,7 +11,7 @@ export default function Navbar() {
     <nav className="bg-white border-b shadow-md px-4 py-3 flex items-center justify-between">
       {/* Logo */}
       <Link href="/" className="text-xl font-bold">
-        Stimart
+        CartStore
       </Link>
 
       {/* Desktop Nav */}
