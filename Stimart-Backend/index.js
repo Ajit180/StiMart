@@ -13,6 +13,7 @@ const allowedOrigins = [
     'http://localhost:3000',
     'https://sti-mart-r4hf.vercel.app/',
     'https://sti-mart.vercel.app/',
+    'https://cart-frontend-2.vercel.app/'
 
   ];
 
