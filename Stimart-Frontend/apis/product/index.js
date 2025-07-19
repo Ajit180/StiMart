@@ -1,9 +1,9 @@
 import axiosIntance from "@/libs/axiosconfig"; // base axios with .env URL
 
 // ✅ Get all products
-export const getAllProducts = async (page=1,limit =4) => {
+export const getAllProducts = async () => {
   try {
-    const response = await axiosIntance.get(`/product/getall?page=${page}&limit=${limit}`);
+    const response = await axiosIntance.get("/product/getall");
     return response.data;
   } catch (error) {
     console.error("Error fetching all products:", error);

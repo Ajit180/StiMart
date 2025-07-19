@@ -41,7 +41,7 @@ export default function Navbar() {
       {menuOpen && (
         <div className="absolute top-14 right-4 bg-white shadow-lg rounded p-4 flex flex-col gap-3 md:hidden z-50">
           <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
-          <Link href="/products" onClick={() => setMenuOpen(false)}>Shop</Link>
+          <Link href="/products" onClick={() => setMenuOpen(false)}>Products</Link>
           <Link href="/categories" onClick={() => setMenuOpen(false)}>Categories</Link>
         </div>
       )}
