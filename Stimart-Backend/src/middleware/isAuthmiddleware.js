@@ -28,8 +28,11 @@ export const isAuthenticated = async (req, res, next) => {
     }
 
     const user = await getUserById(response.id);
-    // console.log("Authenticated user:", user);
-    req.user = user; // here i did not passed the _ so facing an error 
+    req.user = {
+      userId: user._id,
+      role: user.role,
+    };
+
     next();
   } catch (error) {
     console.log('Auth middleware error', error);
