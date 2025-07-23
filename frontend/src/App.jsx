@@ -1,10 +1,10 @@
-import React from 'react'
+import AppRoutes from './AppRoutes'
 
 const App = () => {
   return (
-    <div>
-      This is the frontend part
-    </div>
+      <>
+      <AppRoutes/>
+      </>
   )
 }
 
