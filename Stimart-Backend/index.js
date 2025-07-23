@@ -9,13 +9,14 @@ dotenv.config();
 const app = express();
 
 const allowedOrigins = [
-    'http://localhost:5173',
-    'http://localhost:3000',
-    'https://sti-mart-r4hf.vercel.app/',
-    'https://sti-mart.vercel.app/',
-    'https://cart-frontend-2.vercel.app/'
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'https://sti-mart-r4hf.vercel.app',
+  'https://sti-mart.vercel.app',
+  'https://cart-frontend-2.vercel.app',
+  'https://stimart-frontend.vercel.app'
+];
 
-  ];
 
 // 🛡️ Middleware to parse JSON bodies
 app.use(express.json());
