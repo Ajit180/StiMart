@@ -8,9 +8,9 @@ const AdminLayout = () => {
       : "block px-4 py-2 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-all";
 
   return (
-    <div className="flex scroll-auto md:min-h-screen">
+    <div className="flex md:min-h-screen min-h-[120vh]">
       {/* Sidebar */}
-      <aside className="w-64 bg-gray-900 text-white p-6 shadow-lg">
+      <aside className="sm:w-64 w-40 bg-gray-900 text-white p-6 shadow-lg">
         <h2 className="text-2xl font-bold mb-6 tracking-wide">Admin Panel</h2>
         <nav>
           <ul className="space-y-3">
@@ -19,11 +19,11 @@ const AdminLayout = () => {
                 📁 Category
               </NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink to="admin/dashboard" className={navLinkClass}>
                 📊 Dashboard
               </NavLink>
-            </li>
+            </li> */}
             <li>
               <NavLink to="admin/products" className={navLinkClass}>
                 📦 Products

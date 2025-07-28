@@ -54,3 +54,47 @@ export const createcartService =async(productId,userId)=>{
    
 
 }
+
+
+export const getAllCartService = async()=>{
+
+     try {
+
+          const getallcart = await Cart.find();
+          return getallcart;
+          
+     } catch (error) {
+          console.log("Error in getting all cart data",error);
+          throw error;
+     }
+}
+
+
+
+export const getCartbyIdService = async(id,userId)=>{
+
+    try {
+
+        //check the user have cart or not 
+        const user = await Cart.findOne({user:userId});
+
+        //throw error if userId is not provided
+        if(!user){
+          throw new Error("UserId is not provided");
+        }
+        
+
+        const cart = await Cart.findById(id);
+
+        if(!cart){
+          throw new Error("CardId is not provided");
+        }
+
+        return cart;
+
+        
+    } catch (error) {
+        console.log("Error while getting an cartById in the service layer",error);
+        throw error;
+    }
+}

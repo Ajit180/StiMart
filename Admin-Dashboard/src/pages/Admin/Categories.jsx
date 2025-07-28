@@ -40,7 +40,7 @@ const Categories = () => {
 
   useEffect(() => {
     if (isCreated || isUpdated) {
-      alert(`Category ${isCreated ? "created" : "updated"} successfully ✅`);
+      alert(`Category ${isCreated ? "created" : "updated"} successfully`);
       setCategoryForm({ name: '', slug: '' });
       setIsEditMode(false);
       queryClient.invalidateQueries({ queryKey: ["getAllCategory"] });
@@ -49,7 +49,7 @@ const Categories = () => {
 
   useEffect(() => {
     if (isDeleted) {
-      alert("Category deleted successfully ❌");
+      alert("Category deleted successfully");
       //here write the logic to reload the page
     }
   }, [isDeleted]);
@@ -108,7 +108,7 @@ const Categories = () => {
                   <p className="font-medium">{cat.name}</p>
                   <p className="text-sm text-gray-500">Slug: {cat.slug}</p>
                 </div>
-                <div className="space-x-2">
+                <div className="flex flex-col sm:flex-row sm:justify-end sm:space-x-4 space-y-2 sm:space-y-0">
                   <button
                     onClick={() => handleEdit(cat)}
                     className="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600"

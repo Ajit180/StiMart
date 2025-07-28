@@ -45,8 +45,7 @@ const CreateProduct = () => {
 
   const { data: categories = []} = useGetAllCategory();
 
-  console.log("createdata", createdata);
-  // 🟡 Upload multiple images
+
   const handleUploadImages = async () => {
     if (!files.length) return alert("Please select images");
     if (files.length > 4) return alert("You can only upload up to 4 images");
@@ -74,7 +73,6 @@ const CreateProduct = () => {
       setIsImageUploaded(true);
     } catch (err) {
       alert("Image upload failed");
-      console.error(err);
     } finally {
       setUploading(false);
     }

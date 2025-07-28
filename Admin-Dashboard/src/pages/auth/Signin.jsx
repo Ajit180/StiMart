@@ -32,7 +32,7 @@ export const SigninContainer = () => {
   useEffect(() => {
     if (isSuccess) {
       setTimeout(() => {
-        navigate('/admin/dashboard');
+        navigate('/admin/category');
       }, 2000);
     }
   }, [isSuccess, navigate]);

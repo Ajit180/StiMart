@@ -21,7 +21,7 @@ const AppRoutes = () => {
         {/* <Route path='admin' element={<ProtectedRoute><AdminLayout/></ProtectedRoute>} /> */}
 
       <Route element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
-        <Route path='admin/dashboard' element={<Dashboard />} />
+        {/* <Route path='admin/dashboard' element={<Dashboard />} /> */}
         <Route path='admin/products' element={<ProductContainer/>} />
         <Route path='admin/orders' element={<Orders/>}/>
         <Route path='admin/category' element={<Categories/>}/>

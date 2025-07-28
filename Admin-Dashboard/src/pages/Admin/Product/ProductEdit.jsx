@@ -88,50 +88,69 @@ const ProductEdit = () => {
     <div className="p-6 max-w-6xl mx-auto">
       <h2 className="text-2xl font-semibold mb-4">Manage Products</h2>
 
-      <form onSubmit={handleSubmit}  className={`bg-white shadow rounded p-4 mb-6 ${isEditMode ? '' : 'hidden'}`}>
-        <h3 className="text-lg font-medium mb-2">{isEditMode ? "Update Product" : "Product Details"}</h3>
+      <form
+        onSubmit={handleSubmit}
+        className={`bg-white shadow rounded p-4 mb-6 ${
+          isEditMode ? "" : "hidden"
+        }`}
+      >
+        <h3 className="text-lg font-medium mb-2">
+          {isEditMode ? "Update Product" : "Product Details"}
+        </h3>
         <div className="grid grid-cols-2 gap-4">
           <input
             type="text"
             className="border p-2 rounded"
             placeholder="Product Name"
             value={productForm.name}
-            onChange={(e) => setProductForm({ ...productForm, name: e.target.value })}
+            onChange={(e) =>
+              setProductForm({ ...productForm, name: e.target.value })
+            }
           />
           <input
             type="text"
             className="border p-2 rounded"
             placeholder="Description"
             value={productForm.description}
-            onChange={(e) => setProductForm({ ...productForm, description: e.target.value })}
+            onChange={(e) =>
+              setProductForm({ ...productForm, description: e.target.value })
+            }
           />
           <input
             type="number"
             className="border p-2 rounded"
             placeholder="Price"
             value={productForm.price}
-            onChange={(e) => setProductForm({ ...productForm, price: e.target.value })}
+            onChange={(e) =>
+              setProductForm({ ...productForm, price: e.target.value })
+            }
           />
           <input
             type="number"
             className="border p-2 rounded"
             placeholder="Stock"
             value={productForm.stock}
-            onChange={(e) => setProductForm({ ...productForm, stock: e.target.value })}
+            onChange={(e) =>
+              setProductForm({ ...productForm, stock: e.target.value })
+            }
           />
           <input
             type="text"
             className="border p-2 rounded"
             placeholder="Brand"
             value={productForm.brand}
-            onChange={(e) => setProductForm({ ...productForm, brand: e.target.value })}
+            onChange={(e) =>
+              setProductForm({ ...productForm, brand: e.target.value })
+            }
           />
           <input
             type="text"
             className="border p-2 rounded"
             placeholder="Category ID"
             value={productForm.categoryId}
-            onChange={(e) => setProductForm({ ...productForm, categoryId: e.target.value })}
+            onChange={(e) =>
+              setProductForm({ ...productForm, categoryId: e.target.value })
+            }
           />
         </div>
         {isEditMode && (
@@ -149,14 +168,22 @@ const ProductEdit = () => {
         {isFetching ? (
           <p>Loading products...</p>
         ) : (
-          <ul className="divide-y divide-gray-200"> 
+          <ul className="divide-y divide-gray-200">
             {(products || []).map((prod) => (
-              <li key={prod._id} className="flex justify-between items-center py-2">
+              <li
+                key={prod._id}
+                className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 py-2 border-b"
+              >
+                {/* Product info */}
                 <div>
                   <p className="font-medium">{prod.name}</p>
-                  <p className="text-sm text-gray-500">Brand: {prod.brand} | Price: ₹{prod.price}</p>
+                  <p className="text-sm text-gray-500">
+                    Brand: {prod.brand} | Price: ₹{prod.price}
+                  </p>
                 </div>
-                <div className="space-x-2">
+
+                {/* Action buttons */}
+                <div className="flex gap-2 sm:justify-end">
                   <button
                     onClick={() => handleEdit(prod)}
                     className="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600"
@@ -164,7 +191,7 @@ const ProductEdit = () => {
                     Edit
                   </button>
                   <button
-                    onClick={() => handleDelete(prod._id)} 
+                    onClick={() => handleDelete(prod._id)}
                     className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
                   >
                     Delete
@@ -174,21 +201,22 @@ const ProductEdit = () => {
             ))}
           </ul>
         )}
-        
       </div>
       <div className="flex flex-col sm:flex-row items-center justify-between mt-3">
         <button
           className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-900"
-         onClick={()=>setpage((prev)=>Math.max(prev-1,1))}
-        >Prev</button>
-          <p className="text-xl">{page}</p>
-          <button
+          onClick={() => setpage((prev) => Math.max(prev - 1, 1))}
+        >
+          Prev
+        </button>
+        <p className="text-xl">{page}</p>
+        <button
           className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-900"
-            onClick={()=>setpage((prev)=>Math.max(prev+1,1))} 
-          >Next</button>
-        
-        
-        </div>
+          onClick={() => setpage((prev) => Math.max(prev + 1, 1))}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

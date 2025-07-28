@@ -6,7 +6,7 @@ import Orders from "./pages/Admin/Orders";
 
 export const adminRoutes = (
   <Route path="admin" element={<AdminLayout />}>
-    <Route path="dashboard" element={<Dashboard />} />
+    {/* <Route path="dashboard" element={<Dashboard />} /> */}
     <Route path="products" element={<Products />} />
     <Route path="orders" element={<Orders />} />
   </Route>
