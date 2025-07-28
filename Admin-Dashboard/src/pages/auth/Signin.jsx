@@ -12,6 +12,8 @@ export const SigninContainer = () => {
     confirmPassword: '', // Added confirmPassword to the state
   });
 
+ 
+
   const { isPending, isSuccess, error, siginMutation } = useSignin();
 
   async function handleSubmit(e) {
@@ -36,6 +38,19 @@ export const SigninContainer = () => {
       }, 2000);
     }
   }, [isSuccess, navigate]);
+
+  async function setcredentials() {
+    const getsignin = {
+      email: "admin@cart.com",
+      password: "admin@123",
+      confirmPassword:"admin@123"
+    };
+    setSigninForm({
+      email: getsignin.email,
+      password: getsignin.password,
+      confirmPassword: getsignin.confirmPassword,
+    });
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen p-4">
@@ -102,6 +117,10 @@ export const SigninContainer = () => {
         >
           Sign In
         </button>
+
+        <button onClick={()=>setcredentials()}
+          className="mt-3 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors"
+          >Auto Sigin</button>
 
         <p className="text-s text-muted-foreground mt-4">
           Don't have an account?{" "}
