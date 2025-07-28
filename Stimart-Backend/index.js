@@ -17,20 +17,24 @@ const allowedOrigins = [
   'https://stimart-frontend.vercel.app'
 ];
 
-
-// 🛡️ Middleware to parse JSON bodies
-app.use(express.json());
-
-app.use(cors({
+const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true)
+      callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
     }
   },
-  credentials: true
-}));
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // handle preflight
+
+// 🛡️ Middleware to parse JSON bodies
+app.use(express.json());
 
 // 🛡️ Middleware to parse URL-encoded data (from forms etc.)
 app.use(express.urlencoded({ extended: true }));
