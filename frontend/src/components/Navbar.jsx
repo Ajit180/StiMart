@@ -7,7 +7,7 @@ const Navbar = () => {
       <div className="flex items-center gap-8">
         <h1 className="text-2xl font-bold text-blue-600">Stimart</h1>
         <div className="flex gap-6 text-gray-700 font-medium">
-          <a href="#" className="hover:text-blue-500">
+          <a href="/" className="hover:text-blue-500">
             Home
           </a>
           <a href="#" className="hover:text-blue-500">
