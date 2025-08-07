@@ -10,3 +10,17 @@ export const GetAllProductsRequest = async (page) => {
     throw error.response?.data || error;
   }
 };
+
+
+export const GetProductByIdRequest = async(id)=>{
+
+  try {
+    const response = await axiosconfig.get(`/product/getproduct/${id}`);
+    console.log("product is is ",response.data.data);
+    return response.data.data;
+    
+  } catch (error) {
+    console.log("Error is in fetching the api for the getproductsbyId",error);
+    throw error;
+  }
+}

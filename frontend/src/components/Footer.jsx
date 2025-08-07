@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
         {/* Column 1: Branding & Subscribe */}
         <div>
-          <h1 className="text-2xl font-bold mb-2">Exclusiv</h1>
+          <h1 className="text-2xl font-bold mb-2">Exclusive</h1>
           <p className="mb-1">Subscribe</p>
           <p className="text-sm text-gray-400 mb-4">
             Get 10% off on your order

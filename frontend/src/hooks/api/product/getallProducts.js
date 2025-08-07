@@ -1,4 +1,4 @@
-import { GetAllProductsRequest } from "../../../api/orders"
+import { GetAllProductsRequest } from "../../../api/products"
 import {useQuery} from '@tanstack/react-query'
 
 export const getallProducts = (page) => {
