@@ -1,4 +1,6 @@
-
+import appstore from '../assets/app-store.png'
+import googlestore from '../assets/google-play.png'
+import qrcode from '../assets/qr-code.png'
 const Footer = () => {
   return (
     <footer className="bg-black text-white px-10 py-12">
@@ -59,15 +61,15 @@ const Footer = () => {
           <h2 className="text-lg font-semibold mb-3">Download App</h2>
           <p className="text-sm text-gray-400 mb-2">Save $3 for new users</p>
           <div className="flex gap-2">
-            <img src="" alt="QR Code" className="w-16 h-16 bg-white rounded" />
+            <img src={qrcode} alt="QR Code" className="w-16 h-16 bg-white rounded" />
             <div className="flex flex-col gap-2">
               <img
-                src=""
+                src={googlestore}
                 alt="Google Play"
                 className="w-24 h-8 bg-white rounded"
               />
               <img
-                src=""
+                src={appstore}
                 alt="App Store"
                 className="w-24 h-8 bg-white rounded"
               />

@@ -1,10 +1,10 @@
-import axios from '@/config/axiosconfig';
+import axiosconfig from "../../config/axiosconfig";
 
 
 export const signupRequest = async({email,password,username})=>{
 
     try {
-        const response = await axios.post('/user/signup',{
+        const response = await axiosconfig.post('/user/signup',{
             email,
             password,
             username
@@ -20,7 +20,7 @@ export const signupRequest = async({email,password,username})=>{
 
 export const siginRequest = async({email,password})=>{
     try {
-        const response = await axios.post('/user/signin',{
+        const response = await axiosconfig.post('/user/signin',{
             email,
             password,
         })
