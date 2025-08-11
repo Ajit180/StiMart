@@ -21,7 +21,7 @@ const Products = () => {
         <h2 className="text-3xl font-bold text-gray-800">Featured Products</h2>
         <p className="text-gray-600 mt-2">Check out our latest arrivals</p>
       </div>
-   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
       {data?.products.map((prod,idx) => (
         
           <div key={idx} 
@@ -31,7 +31,7 @@ const Products = () => {
             <img
               src={prod?.images[1]}
               alt="Product 1"
-              className="w-full h-[500px] object-cover rounded-md"
+              className="w-full h-64 sm:h-72 md:h-80  object-cover rounded-md"
             />
             <p className="text-lg font-semibold">{prod?.name}</p>
             <p className="text-blue-600 font-bold">{prod?.price}</p>

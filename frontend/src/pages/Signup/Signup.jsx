@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SignUp } from "../../hooks/api/auth/signup";
+import { SignUp } from "../../hooks/api/auth/useSignUp";
 import { useNavigate } from "react-router-dom";
 
 
@@ -20,12 +20,18 @@ const Signup = () => {
   
   const navigate = useNavigate();
    
-   const {isPending,isError,signupMutate,isSuccess}=SignUp();
+   const {isPending,isError,isSuccess,signupMutate}=SignUp();
 
    //handle signup form 
 
-   async function handlesubmit(){
+   if(isError){
+    return(
+      <div>Error while Signup the Form.....</div>
+    )
+   }
 
+   async function handlesubmit(e){
+      e.preventDefault(e);
      if(signupForm.password != signupForm.confirmpassword){
       alert("Your Password is Not Matched");
      }
@@ -35,15 +41,16 @@ const Signup = () => {
         username:signupForm.username
        })
 
-       useEffect(()=>{
-           if(isSuccess){
-              navigate('/signin')
-           }else{
-            console.log("the user is not registred something went wrong")
-           }
-       },[isSuccess])
    }
 
+
+    useEffect(()=>{
+          if(isSuccess){
+             setTimeout(()=>{
+              navigate('/signin')
+           },3000)
+          }
+       },[isSuccess])
 
 
   return (
@@ -106,7 +113,7 @@ const Signup = () => {
           <div className="mt-6 text-center text-sm text-gray-600">
             <p>
               Already have an account?{" "}
-              <a href="#" className="text-blue-600 hover:underline">
+              <a href="/signin" className="text-blue-600 hover:underline">
                 Login
               </a>
             </p>

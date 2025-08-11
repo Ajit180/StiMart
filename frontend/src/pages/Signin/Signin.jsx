@@ -1,11 +1,36 @@
-import React from "react";
+import { useState } from "react";
+import { useSigin } from "../../hooks/api/auth/useSignin";
+
 
 const Signin = () => {
+
+  const [SigninForm,setSigninForm] = useState({
+      email:"",
+      password:""
+
+  })
+
+
+
+   
+   const {isSuccess,isPending,isError,siginmuation}=useSigin()
+
+   console.log("the value of the email and password is ",SigninForm.email ,"password is  ",SigninForm.password);
+
+
+   async function handlesubmit(){
+     siginmuation({
+      email:SigninForm.email,
+      password:SigninForm.password
+     })
+   }
+
+
   return (
     <div className="flex min-h-screen">
       {/* Side Image */}
       <div className="hidden lg:block w-1/2">
-        <img src="" alt="Side" className="w-full h-full object-cover" />
+        <img src="https://images.pexels.com/photos/6214362/pexels-photo-6214362.jpeg" alt="Side" className="w-full h-full object-cover" />
       </div>
 
       {/* Form Section */}
@@ -20,21 +45,19 @@ const Signin = () => {
           </div>
 
           {/* Form */}
-          <form className="space-y-4">
-            <input
-              type="text"
-              placeholder="Username"
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+          <form className="space-y-4" onSubmit={handlesubmit}>
             <input
               type="email"
               placeholder="Email"
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onChange={(e)=>setSigninForm({...SigninForm, email:e.target.value})}
+              value={SigninForm.email}
             />
             <input
               type="password"
               placeholder="Password"
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onChange={(e)=>setSigninForm({...SigninForm , password:e.target.value})}
             />
             <button
               type="submit"

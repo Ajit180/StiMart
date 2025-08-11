@@ -1,12 +1,19 @@
-import React from "react";
+import { useState } from "react";
+import { CiMenuBurger } from "react-icons/ci";
+import { FaHome, FaUser, FaEnvelope, 
+  FaProjectDiagram, FaSun, FaMoon,FaLinkedin ,FaGithub} from "react-icons/fa";
+
+
 
 const Navbar = () => {
+  const [isopen , setisopen]=useState(false);
   return (
+    <>
     <nav className="flex justify-between items-center px-8 py-4 border-b border-gray-300 bg-white">
       {/* Left section: Logo + Links */}
       <div className="flex items-center gap-8">
         <h1 className="text-2xl font-bold text-blue-600">Stimart</h1>
-        <div className="flex gap-6 text-gray-700 font-medium">
+        <div className="hidden md:flex gap-6 text-gray-700 font-medium">
           <a href="/" className="hover:text-blue-500">
             Home
           </a>
@@ -20,7 +27,7 @@ const Navbar = () => {
       </div>
 
       {/* Right section: Search + Icons */}
-      <div className="flex items-center gap-6">
+      <div className="hidden md:flex items-center gap-6">
         <div className="w-64">
           <input
             type="text"
@@ -34,7 +41,40 @@ const Navbar = () => {
           <div className="hover:text-blue-500 cursor-pointer">User</div>
         </div>
       </div>
+
+      <button className="md:hidden" onClick={() => setisopen(!isopen)}>
+        {<CiMenuBurger />}
+      </button>
     </nav>
+    {isopen && (
+        <div className="md:hidden bg-gray-100 text-black text-center mt-4 space-y-3 p-4">
+          <a
+            href="/"
+            className="flex justify-center items-center space-x-2 hover:text-blue-400"
+          >
+            <FaHome /> <span>Home</span>
+          </a>
+            <a
+            href="/"
+            className="flex justify-center items-center space-x-2 hover:text-blue-400"
+          >
+            <FaHome /> <span>Product</span>
+          </a>
+            <a
+            href="/"
+            className="flex justify-center items-center space-x-2 hover:text-blue-400"
+          >
+            <FaHome /> <span>Category</span>
+          </a>
+            <a
+            href="/"
+            className="flex justify-center items-center space-x-2 hover:text-blue-400"
+          >
+            <FaHome /> <span>Wishlist</span>
+          </a>
+        </div>
+      )}
+      </>
   );
 };
 
