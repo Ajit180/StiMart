@@ -15,7 +15,7 @@ const ProductDetails = () => {
   return (
     <div className='container max-w-[1300px] pl-[25px] pr-[25px] mt-[80px] '>
       {/* row  */}
-        <div className='flex items-center flex-wrap content-around'>
+        <div className='flex flex-col md:flex-row items-center flex-wrap content-around'>
             {/* col 1 */}
             <div className='basis-[50%] min-w-[50%] p-[20px]'>
                <img className='max-w-[100%] p-0'

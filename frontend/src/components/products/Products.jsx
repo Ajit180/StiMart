@@ -1,6 +1,7 @@
 import { getallProducts } from "../../hooks/api/product/getallProducts";
 import { useNavigate } from "react-router-dom";
 
+
 const Products = () => {
  
    const navigate = useNavigate();
@@ -31,7 +32,7 @@ const Products = () => {
             <img
               src={prod?.images[1]}
               alt="Product 1"
-              className="w-full h-64 sm:h-72 md:h-80  object-cover rounded-md"
+              className="w-full h-64 sm:h-72 md:h-80  object-cover rounded-md cursor-pointer"
             />
             <p className="text-lg font-semibold">{prod?.name}</p>
             <p className="text-blue-600 font-bold">{prod?.price}</p>
