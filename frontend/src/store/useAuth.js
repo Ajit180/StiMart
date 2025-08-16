@@ -1,6 +1,6 @@
-import create from 'zustand'
+import {create} from 'zustand'
 
-const useAuth = create((set)=>({
+ const useAuth = create((set)=>({
     user:null,
     token:null,
     isLoading:true,
@@ -32,4 +32,7 @@ const useAuth = create((set)=>({
             
          }
     }
-}))
+}));
+
+
+export default useAuth

@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSigin } from "../../hooks/api/auth/useSignin";
+import { useNavigate } from "react-router-dom";
 
 
 const Signin = () => {
@@ -9,21 +10,33 @@ const Signin = () => {
       password:""
 
   })
+  
+   const navigate = useNavigate();
 
-
-
-   
    const {isSuccess,isPending,isError,siginmuation}=useSigin()
+
+   if(isError){
+     return(<div>Something went Wrong</div>)
+   }
+
 
    console.log("the value of the email and password is ",SigninForm.email ,"password is  ",SigninForm.password);
 
 
-   async function handlesubmit(){
-     siginmuation({
+   async function handlesubmit(e){
+      e.preventDefault();
+    await siginmuation({
       email:SigninForm.email,
       password:SigninForm.password
      })
+
    }
+
+   useEffect(()=>{
+       if(isSuccess){
+          navigate('/');
+       }
+   },[isSuccess])
 
 
   return (
@@ -58,6 +71,7 @@ const Signin = () => {
               placeholder="Password"
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               onChange={(e)=>setSigninForm({...SigninForm , password:e.target.value})}
+              value={SigninForm.password}
             />
             <button
               type="submit"
@@ -71,7 +85,7 @@ const Signin = () => {
           <div className="mt-6 text-center text-sm text-gray-600">
             <p>
               Don't have an account?{" "}
-              <a href="#" className="text-blue-600 hover:underline">
+              <a href="/signup" className="text-blue-600 hover:underline">
                 SignUp
               </a>
             </p>

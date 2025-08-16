@@ -7,7 +7,7 @@ const ProtectedRoute = ({children}) => {
 
     useEffect(() => {
         loadUserFromLocalStorage(); // Load auth info from local storage when component mounts
-      }, [loadUserFromLocalStorage]);
+      }, []);
     
     if(isLoading){
         return<div>Loading..</div>

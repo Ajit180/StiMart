@@ -2,9 +2,7 @@ import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 
 const AdminLayout = () => {
-  const navLinkClass = ({ isActive }) =>
-    isActive
-      ? "block px-4 py-2 rounded-lg bg-gray-700 text-white font-semibold transition-all"
+  const navLinkClass = ({ isActive }) => isActive ? "block px-4 py-2 rounded-lg bg-gray-700 text-white font-semibold transition-all"
       : "block px-4 py-2 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-all";
 
   return (
