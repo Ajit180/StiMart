@@ -25,11 +25,13 @@ import {create} from 'zustand'
                 set({user:JSON.parse(user), token , isLoading:false})
             }else{
                 //if user and token is not given
-                set({user:null,token:null, isLoading:true})
+                set({user:null,token:null, isLoading:false})// mistake here i made true 
+                //which leads to infifine loading 
             }
             
          } catch (error) {
-            
+            console.error("Error loading user:",error);
+            set({user:null,token:null,isLoading:false});
          }
     }
 }));

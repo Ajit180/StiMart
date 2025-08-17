@@ -3,6 +3,7 @@ import { CiMenuBurger } from "react-icons/ci";
 import { FaHome, FaUser, FaEnvelope, 
   FaProjectDiagram, FaSun, FaMoon,FaLinkedin ,FaGithub} from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import Logout from "./logout/Logout";
 
 
 
@@ -26,6 +27,7 @@ const Navbar = () => {
           <a href="#" className="hover:text-blue-500">
             Category
           </a>
+          <Logout/>
         </div>
       </div>
 
@@ -75,6 +77,8 @@ const Navbar = () => {
           >
             <FaHome /> <span>Wishlist</span>
           </a>
+          <Logout/>
+          
         </div>
       )}
       </>

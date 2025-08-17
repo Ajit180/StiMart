@@ -24,8 +24,8 @@ export const createCartController = async(req,res)=>{
 
 export const getallCartController = async(req,res)=>{
     try {
-
-        const getallcart = await getAllCartService();
+        const {userId}=req.user;
+        const getallcart = await getAllCartService(userId);
 
         if(!getallcart){
             return res.status(404).json({

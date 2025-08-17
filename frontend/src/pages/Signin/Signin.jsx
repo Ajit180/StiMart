@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSigin } from "../../hooks/api/auth/useSignin";
 import { useNavigate } from "react-router-dom";
+import useCartSync from "../Cart/CartSync";
 
 
 const Signin = () => {
@@ -9,7 +10,9 @@ const Signin = () => {
       email:"",
       password:""
 
-  })
+  });
+  
+  const {CartSync}=useCartSync();
   
    const navigate = useNavigate();
 
@@ -36,6 +39,10 @@ const Signin = () => {
        if(isSuccess){
           navigate('/');
        }
+
+       CartSync(isSuccess);
+       
+
    },[isSuccess])
 
 

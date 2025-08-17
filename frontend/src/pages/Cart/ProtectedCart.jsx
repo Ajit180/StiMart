@@ -1,18 +1,18 @@
-import { getProductbyId } from '../../hooks/api/product/getProductbyId';
+import { useGetCartDetails } from '../../hooks/api/cart/useGetCartDetails';
 import useAuth from '../../store/useAuth';
+import { GetProductByIdRequest } from '../../api/products';
+
+const ProtectedCart = () => {
+    const {token}=useAuth();
+    const {data}=useGetCartDetails(token);
+    
+    console.log("The cart data is fetech here ",data?.data?.products);
 
 
-const CartPage = () => {
-
-  const{token}=useAuth();
-
-    const id=localStorage.getItem("ProductId")
-    console.log("The value of id is ",id);
-
-    const {data,isLoading,isError,isSuccess}=getProductbyId(id);
-      console.log('Fetched data:', data); // Check what’s inside
   return (
-    <div className="container mx-auto px-6 py-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <>
+      
+     <div className="container mx-auto px-6 py-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
       {/* Product Details */}
       <div className="lg:col-span-2">
         {/* Cart Header */}
@@ -25,20 +25,21 @@ const CartPage = () => {
 
         {/* Cart Item */}
 
-        
-          <div className="grid grid-cols-4 items-center border-b py-4">
+
+     {data?.data?.products?.map((prod,idx)=>(
+             <div key={idx} className="grid grid-cols-4 items-center border-b py-4">
             {/* Product Info */}
             <div className="md:flex md:items-center md:gap-4 flex-col">
               <img
-                src={data?.images[0]}
+                src={prod?.product?.images?.[0]}
                 alt="monitor"
                 className="h-16 w-20 object-cover"
               />
-              <p className="font-medium">{data?.name}</p>
+              <p className="font-medium">{prod?.product?.name}</p>
             </div>
 
             {/* Price */}
-            <p className="text-gray-700">{data?.price}</p>
+            <p className="text-gray-700">{prod?.product?.price}</p>
 
             {/* Quantity */}
             <select className="border rounded-md px-2 py-1 w-16">
@@ -49,10 +50,13 @@ const CartPage = () => {
             </select>
 
             {/* Subtotal */}
-            <p className="font-semibold">{data?.price}</p> 
+            <p className="font-semibold">{prod?.product?.price}</p> 
             {/* //logic to write here about the quantity * prod */}
           </div>
 
+     ))}
+        
+         
 
         {/* Buttons */}
         <div className="flex flex-wrap gap-4 mt-6">
@@ -102,7 +106,10 @@ const CartPage = () => {
         </div>
       </div>
     </div>
-  );
+    
+    </>
+    
+  )
 }
 
-export default CartPage
+export default ProtectedCart

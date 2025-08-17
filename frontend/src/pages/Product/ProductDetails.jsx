@@ -1,5 +1,6 @@
 import {useParams} from 'react-router-dom'
 import { getProductbyId } from '../../hooks/api/product/getProductbyId';
+import AddProductToCart from '../Cart/AddProductToCart';
 
 const ProductDetails = () => {
   
@@ -16,16 +17,14 @@ const ProductDetails = () => {
     )
   }
 
-  function saveProductIdLocal(id){
-      localStorage.setItem("ProductId",id);
-  }
+ 
 
   console.log("the productId",localStorage.getItem("ProductId"))
 
 
 
   return (
-    <div className='container max-w-[1300px] pl-[25px] pr-[25px] mt-[80px] '>
+    <div className='container max-w-[1300px] pl-[25px] pr-[25px] mt-[80px] '>+
       {/* row  */}
         <div className='flex flex-col md:flex-row items-center flex-wrap content-around'>
             {/* col 1 */}
@@ -44,11 +43,8 @@ const ProductDetails = () => {
                   <option >XL</option>
                   <option >Medium</option>
                 </select>
-                <input type="number" value={"1"} className='w-[50px] h-[40px] pl-[10px] text-[20px] ml-[10px] border border-red-400'/>
-                <a href=""  className='inline-block bg-[#ff523b] text-white p-[10px]
-                m-[10px] rounded-[30px] cursor-pointer' 
-                onClick={()=>saveProductIdLocal(id)}
-                >Add to Cart</a>
+                <input type="number" className='w-[50px] h-[40px] pl-[10px] text-[20px] ml-[10px] border border-red-400'/>
+                <AddProductToCart id={id}/>
                 <h3>Product Details</h3>
                 <p>{data?.description}</p>
             </div>

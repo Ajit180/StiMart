@@ -56,11 +56,22 @@ export const createcartService =async(productId,userId)=>{
 }
 
 
-export const getAllCartService = async()=>{
+export const getAllCartService = async(userId)=>{
 
      try {
 
-          const getallcart = await Cart.find();
+          const getallcart = await Cart.findOne({user:userId})
+          .populate("products.product","name price images");
+
+
+
+     //      const carterror = await Cart.findOne({user:userId})
+     //      console.log("Carst Products",carterror.products);
+
+     //      const productIds = carterror.products.map(p => p.product);
+     //     console.log("Product IDs in cart:", productIds);
+     //     const existingProducts = await Product.find({ _id: { $in: productIds } });
+     //     console.log("Existing products in DB:", existingProducts);
           return getallcart;
           
      } catch (error) {

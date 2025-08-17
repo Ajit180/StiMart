@@ -6,6 +6,8 @@ import Signup from './pages/Signup/Signup'
 import Signin from './pages/Signin/Signin'
 import ProductDetails from './pages/Product/ProductDetails'
 import CartPage from './pages/Cart/CartPage'
+import ProtectedCom from './components/ProtectedCom/ProtectedCom'
+import ProtectedCart from './pages/Cart/ProtectedCart'
 
 const AppRoutes = () => {
   return (
@@ -16,6 +18,10 @@ const AppRoutes = () => {
             <Route path='/signin' element={<Signin/>}/>
             <Route path=':id' element={<ProductDetails/>}/>
             <Route path='/cart' element={<CartPage/>}/>
+            <Route path='/pcart'
+             element={<ProtectedCom> 
+                       <ProtectedCart/>  
+                     </ProtectedCom>}/>
         </Route>
      </Routes>
   )

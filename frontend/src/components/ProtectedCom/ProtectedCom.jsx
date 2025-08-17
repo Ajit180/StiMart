@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import useAuth from "../../store/useAuth"
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const ProtectedCom = ({children}) => {
-    const navigate = useNavigate();
      const {user,token,isLoading,loadUserfromLocalStorage}=useAuth();
       
      //load the user auth from the local storage from the 
@@ -12,11 +11,11 @@ const ProtectedCom = ({children}) => {
      },[loadUserfromLocalStorage])
 
      if(isLoading){
-        return(<div>...Loading</div>)
+        return(<div>Loading... in the protected route</div>)
      }
 
      if(!user || !token){
-        navigate('/signin');
+       return  <Navigate to={'/signin'}/>
      }
 
      return children;
