@@ -1,13 +1,12 @@
-import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import MainLayout from './pages/Layout/MainLayout'
 import Home from './pages/Home/Home'
 import Signup from './pages/Signup/Signup'
 import Signin from './pages/Signin/Signin'
 import ProductDetails from './pages/Product/ProductDetails'
-import CartPage from './pages/Cart/CartPage'
 import ProtectedCom from './components/ProtectedCom/ProtectedCom'
 import ProtectedCart from './pages/Cart/ProtectedCart'
+import CartPage from './pages/Cart/Cartpage'
 
 const AppRoutes = () => {
   return (

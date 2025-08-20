@@ -5,7 +5,7 @@ import { PutObjectCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { s3Client } from "../config/awsconfig.js";
 import { AWS_BUCKET_NAME } from "../config/serverconfigfile.js";
-import { createProduct, deleteProduct, getAllProducts, getProductById, updateProduct } from "../service/productService.js";
+import { createProduct, deleteProduct, getAllProducts, getproductbyfilter, getProductById, updateProduct } from "../service/productService.js";
 
 export const createproductcontroller = async(req,res)=>{
    try {
@@ -121,3 +121,26 @@ export const getPresignedUrl = async (req, res) => {
       .json(internalErrorResponse(error));
   }
 };
+
+
+export const getProductfilterController =async(req,res)=>{
+
+  try {
+    
+    //extract the query params from the request as the object
+    const products = await getproductbyfilter(req.query);
+
+    return res.status(200).json({
+      success:true,
+      data:products,
+      message:"The product data is fetch successfully"
+    })
+
+    
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+}

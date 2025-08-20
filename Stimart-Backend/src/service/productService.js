@@ -1,5 +1,5 @@
 import Product from "../schema/products.js";
-
+import Category from "../schema/category.js"
 // Create a new product
 export const createProduct = async (data) => {
   try {
@@ -29,6 +29,46 @@ export const getAllProducts = async (page = 1, limit = 10) => {
     throw error;
   }
 };
+
+
+//Get Product by the filters like brand = ? category = ? price = ? rating ? 
+
+export const getproductbyfilter = async(query)=>{
+
+   
+  try {
+
+     const {category,brand,minPrice,maxPrice,Sortby,rating}=query;
+
+    const filter ={};
+
+
+    if(category){
+      const categorydoc = await Category.findOne({name:category});
+      if(!categorydoc){
+        return []; // No Product found with this category
+      }
+      filter.categoryId = categorydoc._id;
+    }
+    
+    if(brand) filter.brand = brand;
+    if(minPrice && maxPrice) filter.price ={$gte:Number(minPrice),$lte:Number(maxPrice)};
+
+    const sort = {};
+     
+    // GET /products?SortBy=price&order=desc
+    if(Sortby)sort[Sortby]=order === "desc"?-1:1;
+
+    const products = await Product.find(filter).sort(sort).populate("categoryId", "name");
+    return products;
+
+    
+  } catch (error) {
+    console.log("Error in getting products",error.message);
+    throw error ;
+  }
+}
+
 
 // Get a single product by ID
 export const getProductById = async (id) => {

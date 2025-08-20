@@ -1,5 +1,5 @@
 import express from 'express'
-import { createproductcontroller, deleteProductController, getPoductAllContoller, getPoductByIdContoller, getPresignedUrl, updateProductController } from '../../controller/productController.js';
+import { createproductcontroller, deleteProductController, getPoductAllContoller, getPoductByIdContoller, getPresignedUrl, getProductfilterController, updateProductController } from '../../controller/productController.js';
 import { isAuthenticated } from '../../middleware/isAuthmiddleware.js';
 import { authorizeRoles } from '../../middleware/rolemiddleware.js';
 import { getLimiter } from '../../utils/Common/apilimit.js';
@@ -12,5 +12,6 @@ router.put('/updateproduct/:id',isAuthenticated,authorizeRoles('admin'),updatePr
 router.delete('/deleteproduct/:id',isAuthenticated,authorizeRoles('admin'),deleteProductController);
 router.get('/getall',getLimiter,getPoductAllContoller);
 router.get('/getpre',getLimiter,getPresignedUrl);
+router.get('/',isAuthenticated,getProductfilterController);
 
 export default router;
