@@ -11,6 +11,33 @@ export const GetAllProductsRequest = async (page) => {
   }
 };
 
+export const GetAllBrandbyAllProduct = async () => {
+  try {
+    const response = await axiosconfig.get(`/product/getall`);
+    console.log("📦 All products fetched:", response.data);
+    return response?.data?.data;
+  } catch (error) {
+    console.error("Error in fetching products:", error.response?.data || error.message);
+    throw error.response?.data || error;
+  }
+};
+
+export const GetAllproductFilter = async (brand,category) => {
+  try {
+
+    //  const tostringcategory = category.toString();
+    //  const tostringbrand = brand.toString();
+    const response = await axiosconfig.get(`/product?brand=${brand}&category=${category}`);
+    console.log("📦 All products fetched:", response.data);
+    return response?.data?.data;
+  } catch (error) {
+    console.error("Error in fetching products:", error.response?.data || error.message);
+    throw error.response?.data || error;
+  }
+};
+
+
+
 
 export const GetProductByIdRequest = async(id)=>{
 

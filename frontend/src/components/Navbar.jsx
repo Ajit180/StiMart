@@ -14,14 +14,14 @@ const Navbar = () => {
     <>
     <nav className="flex justify-between items-center px-8 py-4 border-b border-gray-300 bg-white">
       {/* Left section: Logo + Links */}
-      <div className="flex items-center gap-8">
+      <div className="flex gap-8">
 
         <h1 onClick={()=>navigate('/')} className="text-2xl font-bold text-blue-600 cursor-pointer">Stimart</h1>
         <div className="hidden md:flex gap-6 text-gray-700 font-medium">
           <a href="/" className="hover:text-blue-500">
             Home
           </a>
-          <a href="#" className="hover:text-blue-500">
+          <a href="/product" className="hover:text-blue-500">
             Products
           </a>
           <a href="#" className="hover:text-blue-500">

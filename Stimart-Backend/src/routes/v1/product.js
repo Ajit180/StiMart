@@ -12,6 +12,6 @@ router.put('/updateproduct/:id',isAuthenticated,authorizeRoles('admin'),updatePr
 router.delete('/deleteproduct/:id',isAuthenticated,authorizeRoles('admin'),deleteProductController);
 router.get('/getall',getLimiter,getPoductAllContoller);
 router.get('/getpre',getLimiter,getPresignedUrl);
-router.get('/',isAuthenticated,getProductfilterController);
+router.get('/',getProductfilterController);
 
 export default router;

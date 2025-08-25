@@ -83,7 +83,7 @@ export const getPoductAllContoller = async(req,res)=>{
     const limit = parseInt(req.query.limit)||10;
 
      const product = await getAllProducts(page,limit);
-     console.log(product);
+    //  console.log(product);
      if (!product) {
         return res.status(404).json({ success: false, message: "Product not found" });
       }

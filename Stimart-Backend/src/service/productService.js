@@ -38,21 +38,44 @@ export const getproductbyfilter = async(query)=>{
    
   try {
 
-     const {category,brand,minPrice,maxPrice,Sortby,rating}=query;
+
+     const { category, brand, minPrice, maxPrice, Sortby, rating } = query;
+
+     function normalizeToArray(value) {
+       if (!value) return []; // null, undefined, empty string to avoid the split error if not give value
+       return value.split(",");
+     }
+
+    const categoryarray = normalizeToArray(category);
+
+    console.log("Categoryarray",categoryarray);
 
     const filter ={};
 
-
-    if(category){
-      const categorydoc = await Category.findOne({name:category});
-      if(!categorydoc){
-        return []; // No Product found with this category
+      for (let i = 0; i < categoryarray.length; i++) {
+        if (categoryarray[i]) {
+          const categorydoc = await Category.findOne({
+            name: categoryarray[i],
+          });
+          const id = categorydoc._id;
+          if (!categorydoc) {
+            return { $in: [] }; // No Product found with this category
+          }
+          if (!filter.categoryId) {
+            filter.categoryId = { $in: [] }; // Initialize it first
+          }
+          filter.categoryId.$in.push(id);
+        }
       }
-      filter.categoryId = categorydoc._id;
-    }
+     
+      console.log("Filter in after the category setting ",filter)
+    
+   
     
     if(brand) filter.brand = brand;
     if(minPrice && maxPrice) filter.price ={$gte:Number(minPrice),$lte:Number(maxPrice)};
+    if(rating) filter.rating=rating;
+      // console.log("Filter",filter);
 
     const sort = {};
      

@@ -1,12 +1,14 @@
 import { getallProducts } from "../../hooks/api/product/getallProducts";
 import { useNavigate } from "react-router-dom";
+import { usegetallProductfilter } from "../../hooks/api/product/getallProducts";
 
 
 const Products = () => {
  
    const navigate = useNavigate();
 
-  const {data,isLoading,isError}= getallProducts(1);
+  const {data,isLoading}= getallProducts(1);
+  // const {data,isLoading}=usegetallProductfilter();
 
   console.log("getallproduct Order's is ",data);
 
@@ -27,7 +29,7 @@ const Products = () => {
         
           <div key={idx} 
           className="bg-white p-3 rounded-lg shadow hover:shadow-md transition"
-          onClick={()=>navigate(`${prod._id}`)}
+          onClick={()=>navigate(`product/${prod._id}`)}
           >
             <img
               src={prod?.images[1]}
@@ -42,7 +44,7 @@ const Products = () => {
       ))}
         </div>
       <div className="mt-10 text-center">
-        <button className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+        <button onClick={()=>navigate('/product')} className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
           View All Products
         </button>
       </div>

@@ -8,7 +8,7 @@ export const getallcategoryRequest =async()=>{
         const response = await axiosconfig.get('category/getall');
         
         console.log("All Value fetched in the category",response.data);
-        return response.data;
+        return response?.data;
         
         
     } catch (error) {
