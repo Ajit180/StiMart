@@ -1,43 +1,38 @@
-import { useState } from "react";
 import { getCategory } from "../../hooks/api/category/useGetCategory"
 import { getallbrand } from "../../hooks/api/product/getallProducts";
-import usefilter from "../../store/useFilter";
+// import usefilter from "../../store/useFilter";
+import { toggleCategory,togglebrand,resetfilter } from "../../store/slices/filterslice";
+import { useDispatch, useSelector } from "react-redux";
 
 const ProductFilter = () => {
 
-    // const [brandcheck , setBrandcheck]=useState([]);
-    // const [categorycheck,setCategory]=useState([]);
 
-    const {toggleBrand,toggleCategory,resetFilters,brandval,categoryval}=usefilter();
+    const dispatch = useDispatch();
+    const {brandval,categoryval}=useSelector((state)=>state.filter);
+
+
+    // const {toggleBrand,toggleCategory,resetFilters,brandval,categoryval}=usefilter();
 
 
     console.log(`The brand value ${brandval} and the category value is ${categoryval}`)
 
     const {data,isLoading}=getCategory();
     const {data:brand}=getallbrand();
-    // console.log("Brand value is ",brand);
  
-    // const togglecat =(e)=>{
-    //     const {value,checked}=e.target;
-    //     setCategory((prev)=>
-    //     checked?[...prev,value]:prev.filter((v)=>v!=value))
-    // }
-
-    // const togglebrand =(e)=>{
-    //     const {value,checked}=e.target;
-    //     setBrandcheck((prev)=>
-    //     checked?[...prev,value]:prev.filter((v)=>v!=value))
-    // }
 
         const handleBrandChange = (e) => {
           const { value, checked } = e.target;
-          toggleBrand(value, checked);
+          dispatch(togglebrand({brand:value, checked}));
         };
 
         const handleCategoryChange = (e) => {
           const { value, checked } = e.target;
-          toggleCategory(value, checked);
+          dispatch(toggleCategory({category:value, checked}));
         };
+
+        const handleReset =()=>{
+          dispatch(resetfilter());
+        }
 
     
   
@@ -46,7 +41,7 @@ const ProductFilter = () => {
   {/* Header */}
   <div className="flex items-center justify-between">
     <h1 className="text-lg font-semibold text-gray-800 hover:cursor-pointer">Filters</h1>
-    <button className="text-sm text-red-500 hover:underline"  onClick={resetFilters}>Clear Filters</button>
+    <button className="text-sm text-red-500 hover:underline"  onClick={handleReset}>Clear Filters</button>
   </div>
 
   {/* Category */}

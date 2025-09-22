@@ -27,7 +27,6 @@ const Navbar = () => {
           <a href="#" className="hover:text-blue-500">
             Category
           </a>
-          <Logout/>
         </div>
       </div>
 
@@ -42,8 +41,8 @@ const Navbar = () => {
         </div>
         <div className="flex gap-4 text-gray-600">
           <div className="hover:text-blue-500 cursor-pointer">Wishlist</div>
-          <div className="hover:text-blue-500 cursor-pointer">Cart</div>
-          <div className="hover:text-blue-500 cursor-pointer">User</div>
+          <div className="hover:text-blue-500 cursor-pointer" onClick={()=>navigate('/pcart')} >Cart</div>
+           <Logout/>
         </div>
       </div>
 

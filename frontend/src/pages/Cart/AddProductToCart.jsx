@@ -4,9 +4,9 @@ import useAuth from "../../store/useAuth";
 
 const AddProductToCart = ({id}) => {
 
-    const{user,token}=useAuth();
+    // const{user,token}=useAuth();
 
-    const {isSuccess,isError,isPending,addproductToCartmutate}=useAddProductToCart();
+    // const {isSuccess,isError,isPending,addproductToCartmutate}=useAddProductToCart();
 
    function saveProductIdLocal(id){
       localStorage.setItem("ProductId",id);

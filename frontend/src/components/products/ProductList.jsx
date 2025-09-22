@@ -1,14 +1,15 @@
 import { useState } from "react";
-import { getallProducts } from "../../hooks/api/product/getallProducts";
 import { useNavigate } from "react-router-dom";
 import { usegetallProductfilter } from "../../hooks/api/product/getallProducts";
 import usefilter from "../../store/useFilter";
+import { useSelector } from "react-redux";
+
 
 
 const ProductList = ({}) => {
     const [page,setpage]=useState(1);
 
-    const {brandval,categoryval}=usefilter();
+    const {brandval,categoryval}=useSelector((state)=>state.filter);
     
     const navigate = useNavigate();
     // const {data,isLoading}=getallProducts(page);

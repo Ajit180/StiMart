@@ -1,10 +1,13 @@
 import { getProductbyId } from '../../hooks/api/product/getProductbyId';
 import useAuth from '../../store/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 
 const CartPage = () => {
 
   const{token}=useAuth();
+
+  const navigate = useNavigate();
 
     const id=localStorage.getItem("ProductId")
     console.log("The value of id is ",id);
@@ -96,7 +99,7 @@ const CartPage = () => {
             <p>$1750</p>
           </div>
 
-          <button className="w-full mt-5 bg-red-500 text-white py-3 rounded hover:bg-red-600">
+          <button onClick={()=>navigate('/checkout')} className="w-full mt-5 bg-red-500 text-white py-3 rounded hover:bg-red-600">
             Proceed to Checkout
           </button>
         </div>
